@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+           <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Email" required autocomplete="off">
+           </div>
+           <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Password" required autocomplete="off">
+           </div>
+           <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <p>Don't have an account? <a href="/signup">Signup</a></p>
+    </div>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission for testing purposes
+            const city = localStorage.getItem('city');
+            
+            // Simulate login (replace with actual login handling logic)
+            if (city) {
+                localStorage.removeItem('city'); // Clean up
+                window.location.href = `/${city.toLowerCase()}`; // Redirect to city-specific page
+            } else {
+                // Default redirect if no city is stored
+                window.location.href = '/home';
+            }
+        });
+    </script>
+    
+</body>
+</html>

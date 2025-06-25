@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Requests</title>
+    <style>
+    body {
+        font-family: 'Roboto', sans-serif; 
+        background-color: #f9f9f9; 
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+
+    header {
+        background-color: #f8f9fa;
+        padding: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+       
+    }
+
+    header .logo {
+        font-weight: bold;
+        font-size: 25px;
+        margin-left: 30px;
+    }
+
+    header ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+    }
+
+    header ul li {
+        margin-left: 75px;
+        font-size: 18px;
+    }
+
+    header a {
+        text-decoration: none;
+        color: #333;
+    }
+    
+    .profile-btn {
+        padding: 10px 20px;
+        background-color: #001934;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    /* Rest of the code */
+    .container {
+        width: 80%; 
+        margin: 30px auto; 
+        padding: 20px; 
+        border-radius: 8px; 
+        background-color:#001934;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    }
+
+    h2 {
+        color: #001934; /* Updated to black */
+        font-size: 32px; 
+        margin-bottom: 20px; 
+        text-align: center; 
+    }
+
+    .requests-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px; 
+    }
+
+    .request-box {
+        background-color: #f3f4f6; 
+        border: 1px solid #ddd; 
+        border-radius: 8px; 
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+        transition: transform 0.2s; 
+    }
+
+    .request-box:hover {
+        transform: translateY(-5px); 
+        border-color: #001934; 
+    }
+
+    .request-details p {
+        margin: 10px 0; 
+        font-size: 20px; 
+    }
+
+    .request-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; 
+    }
+
+    .accept-icon, .decline-icon {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 22px; 
+        transition: transform 0.3s;
+    }
+
+    .accept-icon:hover, .decline-icon:hover {
+        transform: scale(1.2); 
+    }
+
+    
+
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar from Profile -->
+<header>
+    <nav>
+        <div class="logo">METRO-ON-LINE</div>
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Community</a></li>
+            <li><button class="profile-btn">Profile</button></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<div class="container">
+    <h2 style="color:#ddd">Booking History</h2>
+
+    <!-- Requests section -->
+    <div class="requests-section" id="requests-section">
+        <% users.forEach(function(user){ %>
+        <!-- Example Request 1 -->
+        <div class="request-box" id="request-1">
+            <div class="request-details">
+                <p><strong>From:</strong><%= user.from %></p>
+                <p><strong>To:</strong><%= user.to %> </p>
+                <p><strong>Date:</strong> <%= user.journeyDate %> </p>
+                <p><strong>Time:</strong> <%= user.journeyTime %> </p>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+
+
+
+<script>
+function handleAccept(id) {
+    alert('Accepted request #' + id);
+}
+
+function handleDecline(id) {
+    alert('Declined request #' + id);
+}
+</script>
+
+</body>
+</html>

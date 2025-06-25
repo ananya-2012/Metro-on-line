@@ -1,0 +1,905 @@
+@keyframes hideAndShow {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+        /* Hidden at 50% (for half of the time) */
+    }
+
+    100% {
+        opacity: 1;
+        /* Visible again at 100% */
+    }
+}
+
+/* Apply the animation to the flag elements */
+.fromFlags,
+.toFlags {
+    animation: hideAndShow 0.1s ease-in-out infinite;
+    /* 2 seconds cycle (1 sec hide + 1 sec show) */
+}
+
+/* Optional: If you want to hide the flags only once, use 'forwards' */
+.fromFlags,
+.toFlags {
+    animation: hideAndShow 0.3s ease-in-out 1 forwards;
+    /* Hide and show once */
+}
+
+/* Control the width and height for flags */
+.fromFlags>foreignObject,
+.toFlags>foreignObject {
+    display: block;
+    opacity: 1;
+    /* Start visible */
+    animation: hideAndShow 0.3s ease-in-out 1 forwards;
+    /* Hide for 1 sec, show for 1 sec */
+}
+
+/* Optional: Control width and height of the map image to fit the viewport */
+
+
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+.interchange {
+    cursor: pointer;
+}
+
+
+
+.tools {
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    z-index: 1000;
+}
+
+
+.tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: -100vh;
+    margin-top: 10px;
+    pointer-events: none;
+    height: max-content;
+    flex-wrap: wrap;
+    height: -webkit-max-content;
+    height: max-content;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: baseline;
+    align-items: baseline;
+    margin-bottom: -100vh;
+    margin-top: 10px;
+    pointer-events: none;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+}
+
+
+
+.map-zoom {
+    float: right;
+    user-select: none;
+    width: auto;
+    pointer-events: all;
+    margin-top: 15px;
+    z-index: 1000;
+}
+
+.map-zoom ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    background-color: #fff;
+    box-shadow: 0 0 30px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    width: 50px;
+    overflow: hidden;
+    border: 1px solid #d9d9d9;
+}
+
+.map-zoom ul li {
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.map-zoom ul li+li {
+    border-top: 1px solid #f1f1f1;
+}
+
+.map-zoom ul li:hover {
+    cursor: pointer;
+    background-color: #00b38f;
+    color: #fff;
+}
+
+
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transform: scale(0.97);
+}
+
+header .logo {
+    font-weight: bold;
+    font-size: 24px;
+    /* Reduced font size */
+    margin-left: 50px;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+header ul li {
+    margin-left: 35px;
+    /* Reduced margin */
+    font-size: 16px;
+    /* Reduced font size */
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+header a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease, font-size 0.3s ease;
+}
+
+/* Hover Effect on Nav Items */
+header ul li:hover a {
+    color: #001934;
+    font-size: 18px;
+    /* Adjusted hover font size */
+}
+
+header ul li::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #001934;
+    transition: width 0.3s ease;
+}
+
+header ul li:hover::after {
+    width: 100%;
+}
+
+.login-btn {
+    padding: 8px 16px;
+    /* Reduced padding */
+    background-color: #001934;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    /* Reduced font size */
+    margin-left: 3px;
+    /* Adjusted margin */
+}
+
+
+
+
+body {
+    font-family: Poppins, sans-serif;
+    font-size: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    width: calc(100% - 2px);
+    /* Adjust width to avoid scrollbar overlap */
+    background-color: #f8f9fa;
+    padding: 13px 8px;
+    /* Reduced padding */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+
+
+
+
+body {
+    flex-direction: column;
+    height: 100vh;
+    /* Allows the body to stretch to full viewport height */
+}
+
+#map-container {
+    position: relative;
+    /* Allows absolute positioning within */
+    width: 100vw;
+    /* Full viewport width */
+    height: 100vh;
+    /* Full viewport height */
+    overflow: hidden;
+    /* Prevent overflow from the map */
+}
+
+
+.map-image {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    overflow: hidden;
+    /* Ensure this is lower than the planner */
+}
+
+
+#map {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+
+
+.journey-planner {
+    position: fixed;
+    /* Keeps planner fixed on the screen */
+    top: 170px;
+    /* Adjust positioning as needed */
+    left: 30px;
+    width: 350px;
+    height: auto;
+    background-color: #072442;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    z-index: 10000;
+    /* Ensures it's on top of other elements */
+}
+
+
+
+
+:root {
+    --planner-top: 20px;
+    --planner-left: 30px;
+}
+
+
+.journey-planner h2 {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.journey-planner h2::before {
+    content: '🚇';
+    margin-right: 8px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.label-from,
+.label-to,
+.label-journey {
+    font-weight: bold;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+select,
+input[type="button"],
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    color: #333;
+}
+
+select:hover,
+input[type="button"]:hover,
+input[type="text"]:hover,
+input[type="date"]:hover,
+input[type="time"]:hover {
+    background-color: #e0e0e0;
+}
+
+.interchange-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1px;
+}
+
+#interchangeBtn {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+}
+
+.interchange-logo {
+    width: 24px;
+    height: 24px;
+    transform: rotate(90deg);
+}
+
+.leaving-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.leaving-text {
+    font-weight: bold;
+    color: #FFD700;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.now-group {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.now-button {
+    background-color: white;
+    border: 1px solid #007bff;
+    color: #007bff;
+    border-radius: 5px;
+    padding: 2px 4px;
+    /* Adjusted padding to fit text size more closely */
+    cursor: pointer;
+    width: auto;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.now-button:hover {
+    background-color: #000000;
+    color: #000000;
+}
+
+.time-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.time-item {
+    flex: 1;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.reset-button {
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.reset-button:hover {
+    color: #d8d1d1;
+}
+
+.button-group input[type="button"] {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: auto;
+}
+
+
+
+.label-from,
+.label-to,
+.label-journey {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.search-container,
+.search-popup-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-container input,
+.search-popup-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Popup Styles */
+.data-popup {
+    display: none;
+    position: absolute;
+
+    top: -1px;
+    left: 410px;
+    width: 350px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 10;
+
+}
+
+.data-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.data-popup-header h5 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.closepopup {
+    cursor: pointer;
+    font-size: 18px;
+    color: #c00;
+    font-weight: bold;
+}
+
+.popup-result ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.popup-result-location,
+.popup-result-line {
+    font-size: 14px;
+}
+
+/* Station Item Styling */
+.station-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.station-item:hover {
+    background-color: #f9f9f9;
+}
+
+.sub-result-left .circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    background-color: #ccc;
+    font-size: 12px;
+    color: white;
+}
+
+.sub-result-right .sub-result-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.sub-result-right .sub-result-list {
+    font-size: 12px;
+    color: #777;
+}
+
+.sub-result-list ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    gap: 5px;
+}
+
+.sub-result-list ul li {
+    display: inline-block;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Line Colors */
+
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    /* Ensure dropdown content is positioned relative to this */
+    display: inline-block;
+    width: 100%;
+}
+
+.dropdown-content {
+    font-size: large;
+    display: none;
+    /* Initially hidden */
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    /* Ensure it is above other elements */
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    /* Allow scrolling if content exceeds max height */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Show dropdown when "show" class is added */
+.dropdown-content.show {
+    display: block;
+    /* Show dropdown when it has the "show" class */
+}
+
+.dropdown-content div {
+    cursor: pointer;
+    padding: 10px;
+    /* Add some padding for better click area */
+}
+
+.dropdown-content div:hover {
+    background-color: #f1f1f1;
+    /* Highlight on hover */
+}
+
+
+.show {
+    display: block;
+}
+
+/* Result Display */
+#result {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+#result strong {
+    color: #007BFF;
+    font-size: 20px;
+}
+
+/* Button Group Styling */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.button-group button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-group button:hover {
+    background-color: #0056b3;
+}
+
+.leaving-group {
+    margin-top: 10px;
+}
+
+/* Additional Styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    color: #007BFF;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Additional UI Enhancements */
+
+
+.search-container input {
+    border-radius: 5px;
+}
+
+.search-container input:focus {
+    border-color: #007BFF;
+}
+
+.search-popup-container input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.search-popup-container input:focus {
+    border-color: #007BFF;
+}
+
+.popup-result ul {
+    max-height: 370px;
+    overflow-y: auto;
+}
+
+.popup-result ul li {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.popup-result ul li:hover {
+    background-color: #f0f0f0;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.arrow-icon {
+    position: absolute;
+    right: 10px;
+    /* Adjust based on spacing */
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    display: block;
+}
+
+
+.red {
+    color: #c1282b;
+}
+
+.yellow {
+    color: #fbc02d;
+}
+
+.Dgreen {
+    color: #3e77bc;
+}
+
+.green {
+
+    color: #52aa55;
+
+}
+
+.Dred {
+    color: #8115ff;
+
+}
+
+.pink {
+    color: #e692be;
+}
+
+.orange {
+    color: #FF00FF;
+}
+
+.c1 {
+    color: #d4d4d6;
+}
+
+.c2 {
+    color: #eb8923;
+}
+
+.c3 {
+    color: #015b97;
+}
+
+
+/* Overlay Styles */
+.fare-display {
+    position: fixed;
+    top: 170px;
+    left: 30px;
+    width: 350px;
+    height: auto;
+    /* Allows height to adjust based on content */
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    z-index: 10000;
+    /* Ensures it's on top of other elements */
+    font-size: 26px;
+    /* Increase font size for better readability */
+    background-color: palegoldenrod;
+}
+
+.fare-info div {
+    margin-bottom: 20px;
+    /* Space between fare items */
+    font-size: 18px;
+    /* Increased font size for fare information */
+}
+
+strong {
+    color: #333;
+    /* Strong text color */
+    font-size: 20px;
+    /* Increased font size for stronger emphasis */
+}
+
+/* Styling for the close button */
+.close-button {
+    display: block;
+    margin: 10px auto 20px auto;
+    /* Add space below the close button */
+    padding: 8px 12px;
+    /* Slightly larger padding for button */
+    font-size: 16px;
+    /* Larger font size for the button */
+    background-color: #dc3545;
+    /* Red background */
+    color: white;
+    /* White text */
+    border: none;
+    /* No border */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor */
+}
+
+.close-button:hover {
+    background-color: #c82333;
+    /* Darker red on hover */
+}
+
+
+
+.button-container {
+    display: flex;
+    /* Use flexbox for button alignment */
+    justify-content: flex-end;
+    /* Align button to the right */
+}
+
+.book-button {
+    display: inline-block;
+    /* Inline block for button */
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF;
+    /* Primary blue color */
+    border: none;
+    /* No border */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s;
+    /* Smooth transitions */
+    text-align: center;
+    /* Center text */
+    text-decoration: none;
+    /* Remove underline */
+}
+
+.book-button:hover {
+    background-color: #0056b3;
+    /* Darker shade for hover */
+    transform: scale(1.05);
+    /* Slightly increase size on hover */
+}
+
+.button-container {
+    display: flex;
+    /* Use flexbox for button alignment */
+    justify-content: flex-end;
+    /* Align button to the right */
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metro Ticketing System</title>
+    <link rel="stylesheet" href="/stylesheets/pay.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Metro Ticketing System</h1>
+        <form id="ticketForm" method="post" action="/pay">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ticketCount">Number of Tickets:</label>
+                <input type="number" id="ticketCount" name="ticketCount" value="1" min="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method:</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value=""  disabled selected>Select payment method</option>
+                    <option value="credit">Credit Card</option>
+                    <option value="debit">Debit Card</option>
+                    <option value="upi">UPI</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fare">Total Fare:</label>
+                <p id="fareDisplay">₹50</p>
+            </div>
+            <div id="paymentDetails" class="form-group"></div>
+            <button type="submit">Purchase Ticket</button>
+        </form>
+
+    <script src="scripts/pay.js"></script>
+</body>
+</html>

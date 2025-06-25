@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #001934;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #0044cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment for Your Journey</h1>
+        <p><strong>Customer ID:</strong> <%= customerId %></p>
+        <p><strong>From:</strong> <%= from %></p>
+        <p><strong>To:</strong> <%= to %></p>
+        <p><strong>Date & Time:</strong> <%= journeyDateTime %></p>
+        <a href="#" class="button" onclick="redirectToPayment()">Proceed to Payment</a>
+    </div>
+    <script>
+        function redirectToPayment() {
+            window.location.href = '/payment'; // Redirect to the payment route
+        }
+    </script>
+</body>
+</html>
